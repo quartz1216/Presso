@@ -44,30 +44,30 @@ Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{#MyAppName} をアンインストール"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
-; -- Right-click "Pressoで圧縮" entry for major video extensions --
+; -- Right-click "Compress with Presso" entry for major video extensions --
 [Registry]
 ; .mp4
-Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mp4\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Pressoで圧縮"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mp4\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Compress with Presso"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mp4\shell\Presso";          ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mp4\shell\Presso\command";  ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 
 ; .mov
-Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mov\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Pressoで圧縮"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mov\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Compress with Presso"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mov\shell\Presso";          ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mov\shell\Presso\command";  ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 
 ; .mkv
-Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mkv\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Pressoで圧縮"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mkv\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Compress with Presso"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mkv\shell\Presso";          ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.mkv\shell\Presso\command";  ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 
 ; .webm
-Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.webm\shell\Presso";         ValueType: string; ValueName: "";     ValueData: "Pressoで圧縮"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.webm\shell\Presso";         ValueType: string; ValueName: "";     ValueData: "Compress with Presso"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.webm\shell\Presso";         ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.webm\shell\Presso\command"; ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 
 ; .avi
-Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Pressoで圧縮"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso";          ValueType: string; ValueName: "";     ValueData: "Compress with Presso"; Flags: uninsdeletekey
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso";          ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#MyAppExeName},0"
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso\command";  ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 

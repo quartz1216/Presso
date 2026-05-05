@@ -1,36 +1,48 @@
 # Presso
 
-Discord の動画送信制限 (10MB) を突破するために、動画を「とにかく」目標サイズに収めて圧縮する Windows 用ツールです。FFmpeg の 2-pass エンコードに比例フィードバック収束を組み合わせて、目標サイズ未満になるまで自動で再試行します。
+A Windows utility that aggressively compresses videos to fit Discord's 10 MB upload limit (or any size you set). Built around FFmpeg 2-pass encoding with proportional-feedback bitrate convergence — instead of giving up after a few attempts, it learns from each try and homes in on the target size automatically.
 
-## できること
+## Features
 
-- ドラッグ&ドロップで複数本まとめて圧縮（進捗バー表示・キャンセル可）
-- mp4 / mov / mkv / webm / avi に対応、出力は常に `<元名>_presso.mp4`
-- エクスプローラーの **右クリック → 「Pressoで圧縮」** で同じフォルダに圧縮版を生成
-- 目標サイズ・コーデック (HEVC / H.264) ・出力先を GUI から設定して保存
+- **Drag & drop GUI** with a multi-file queue, per-item progress bars, and cancellation.
+- Supports `mp4`, `mov`, `mkv`, `webm`, `avi` as input — output is always `<name>_presso.mp4`.
+- **Right-click → "Compress with Presso"** in Explorer to compress directly into the source folder.
+- Configurable target size, codec (HEVC / H.264), and output directory. Settings are persisted to `%APPDATA%\Presso\config.json`.
 
-## インストール
+## Installation
 
-[Releases](../../releases) から最新の `PressoSetup-x.y.z.exe` をダウンロードして実行してください。`C:\Program Files\Presso\` にインストールされ、対応動画拡張子の右クリックメニューに「Pressoで圧縮」が登録されます。FFmpeg は同梱済みなので別途インストールは不要です。
+Grab the latest `PressoSetup-x.y.z.exe` from [Releases](../../releases) and run it. The installer:
 
-## 使い方
+- places Presso under `C:\Program Files\Presso\`,
+- registers the **Compress with Presso** context menu for the supported video extensions, and
+- bundles its own FFmpeg/ffprobe — no separate install needed.
 
-- スタートメニューから **Presso** を起動 → ウィンドウに動画をドロップ
-- またはエクスプローラーで動画を右クリック → **Pressoで圧縮**
-- 設定は `Presso` ウィンドウの「設定」ボタンから変更可能（既定: 目標 10MB / HEVC ON / 同フォルダ出力）
+## Usage
 
-## ソースからビルド
+- Launch **Presso** from the Start Menu and drop video files onto the window, **or**
+- right-click a video file in Explorer and pick **Compress with Presso**.
 
-### 必要なもの
+Defaults: target 10 MB, HEVC enabled, output written next to the source file. Open the **Settings** dialog to change any of these. The right-click flow always writes to the source folder regardless of the GUI's output-folder setting.
+
+## How the size targeting works
+
+1. Read duration / dimensions via `ffprobe`.
+2. Compute an initial video bitrate from `target_bytes − audio_budget`, divided by duration.
+3. Run a 2-pass encode at that bitrate.
+4. If the result is over budget, set `next_bitrate = current * (target_size / actual_size) * 0.97` and retry.
+
+This proportional feedback usually converges in 1–2 retries instead of grinding through a fixed `* 0.9` decay. If five attempts still don't land it, it falls back to HEVC → H.264, then a CRF-32 last resort (size not guaranteed in CRF mode).
+
+## Building from source
+
+### Prerequisites
 
 - Windows 10/11 (x64)
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Inno Setup 6](https://jrsoftware.org/isdl.php)
-- FFmpeg バイナリ (Windows 64-bit GPL shared build)
-  - 例: [BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds/releases) の `ffmpeg-master-latest-win64-gpl-shared.zip`
-  - リポジトリには同梱していないので、各自でダウンロードして配置してください
+- FFmpeg Windows 64-bit GPL **shared** build (e.g. [BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds/releases) → `ffmpeg-master-latest-win64-gpl-shared.zip`). FFmpeg binaries are not committed to the repo — fetch separately and unzip into the layout below.
 
-### 配置
+### Layout
 
 ```
 Presso\
@@ -43,18 +55,18 @@ Presso\
 └── installer\Presso.iss
 ```
 
-### ビルド
+### Build
 
 ```powershell
 .\build.ps1
 ```
 
-成果物は `installer\output\PressoSetup-x.y.z.exe` に出力されます。
+Output: `installer\output\PressoSetup-x.y.z.exe`.
 
-## ライセンス
+## License
 
-Presso 本体のソースコードは [MIT License](LICENSE) です。
+The Presso application source is [MIT-licensed](LICENSE).
 
-ただしインストーラと配布物には FFmpeg バイナリ (libx264 / libx265 を含む GPLv3 ビルド) を同梱しています。FFmpeg 部分は GPLv3 が適用されます。詳細は [`LICENSES/THIRD_PARTY_NOTICES.txt`](LICENSES/THIRD_PARTY_NOTICES.txt) を参照してください。
+The distributed installer also bundles FFmpeg binaries (compiled with `--enable-gpl --enable-version3`, including `libx264` and `libx265`). Those binaries are licensed under **GPLv3** and are governed by their own terms — see [`LICENSES/THIRD_PARTY_NOTICES.txt`](LICENSES/THIRD_PARTY_NOTICES.txt) and [`LICENSES/GPLv3.txt`](LICENSES/GPLv3.txt). Presso invokes FFmpeg only as an external process; no FFmpeg code is statically linked into Presso itself.
 
-H.264 / HEVC は特許対象のフォーマットです。商用配布や業務利用の際はそれぞれのパテントプール (MPEG-LA / HEVC Advance / Velos Media など) のライセンス条件を確認してください。
+H.264 / HEVC are patent-encumbered formats. If you redistribute or use this commercially, check the licensing terms of the relevant patent pools (MPEG-LA, HEVC Advance, Velos Media).
