@@ -1,0 +1,97 @@
+================================================================================
+Presso — Third-Party Notices
+================================================================================
+
+The Presso application itself is distributed under the MIT License (see the
+top-level LICENSE file).
+
+This installer and runtime distribution additionally bundles the FFmpeg
+project's executables and shared libraries. These components are NOT covered
+by the MIT License — they are licensed separately, as described below.
+
+The Presso application invokes FFmpeg only as an external process; it does
+not statically link or embed FFmpeg code into its own binary.
+
+--------------------------------------------------------------------------------
+1. FFmpeg
+--------------------------------------------------------------------------------
+
+Files bundled (under <InstallDir>\ffmpeg\bin\):
+  ffmpeg.exe, ffprobe.exe,
+  avcodec-*.dll, avdevice-*.dll, avfilter-*.dll, avformat-*.dll,
+  avutil-*.dll, swresample-*.dll, swscale-*.dll
+
+Project:    The FFmpeg project — https://ffmpeg.org/
+Source:     https://ffmpeg.org/download.html
+Build origin: BtbN/FFmpeg-Builds (Windows GPL shared) —
+            https://github.com/BtbN/FFmpeg-Builds/releases
+
+License:    Because this build was compiled with `--enable-gpl
+            --enable-version3` and includes GPL-only encoders such as
+            libx264 and libx265, the FFmpeg binaries here are distributed
+            under the GNU General Public License version 3 (GPLv3).
+            The full GPLv3 text is provided in LICENSES/GPLv3.txt.
+            Some component libraries are LGPLv3 — see LICENSES/LGPLv3.txt.
+
+Bundled FFmpeg version (as reported by `ffmpeg -version` at packaging time):
+  ffmpeg version N-121432-g6b961f5963-20251014
+  built with gcc 15.2.0 (crosstool-NG 1.28.0.1_403899e)
+
+FFmpeg configuration used in this build:
+  --prefix=/ffbuild/prefix --pkg-config-flags=--static
+  --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32-
+  --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3
+  --disable-debug --enable-shared --disable-static --disable-w32threads
+  --enable-pthreads --enable-iconv --enable-zlib --enable-libxml2
+  --enable-libvmaf --enable-fontconfig --enable-libharfbuzz
+  --enable-libfreetype --enable-libfribidi --enable-vulkan
+  --enable-libshaderc --enable-libvorbis --disable-libxcb --disable-xlib
+  --disable-libpulse --enable-opencl --enable-gmp --enable-lzma
+  --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth
+  --enable-chromaprint --enable-libdav1d --enable-libdavs2
+  --enable-libdvdread --enable-libdvdnav --disable-libfdk-aac
+  --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme
+  --enable-libkvazaar --enable-libaribcaption --enable-libass
+  --enable-libbluray --enable-libjxl --enable-libmp3lame
+  --enable-libopus --enable-libplacebo --enable-librist --enable-libssh
+  --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq
+  --enable-lv2 --enable-libvpl --enable-openal --enable-liboapv
+  --enable-libopencore-amrnb --enable-libopencore-amrwb
+  --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt
+  --enable-librav1e --enable-librubberband --enable-schannel
+  --enable-sdl2 --enable-libsnappy --enable-libsoxr --enable-libsrt
+  --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d
+  --disable-libdrm --enable-vaapi --enable-libvidstab --enable-libvvenc
+  --enable-whisper --enable-libx264 --enable-libx265 --enable-libxavs2
+  --enable-libxvid --enable-libzimg --enable-libzvbi
+
+Notable GPL-licensed encoders enabled:
+  libx264 — H.264/AVC encoder           (GPLv2+)   https://www.videolan.org/developers/x264.html
+  libx265 — H.265/HEVC encoder          (GPLv2+)   https://www.videolan.org/developers/x265.html
+  libxvid — Xvid encoder                (GPLv2+)   https://www.xvid.com/
+  libxavs2, libdavs2, libuavs3d, etc.   (various open-source licenses)
+
+Obtaining the corresponding source code (GPLv3 §6 requirement):
+  The complete source code for the bundled FFmpeg binaries is available
+  from the upstream project:
+    https://ffmpeg.org/releases/
+    https://github.com/FFmpeg/FFmpeg/
+  The exact build script and configuration used to produce these binaries
+  is published at:
+    https://github.com/BtbN/FFmpeg-Builds
+
+  If you would like the corresponding source for the specific build
+  bundled here, please open an issue on the Presso repository and we will
+  point you to the matching upstream tag/commit.
+
+--------------------------------------------------------------------------------
+Patent / format notice
+--------------------------------------------------------------------------------
+
+H.264/AVC and H.265/HEVC are patented technologies. Use of the bundled
+encoders may require licenses from MPEG-LA / HEVC Advance / Velos Media
+depending on your jurisdiction and use case. Consult a lawyer if in doubt.
+
+================================================================================
+END OF NOTICES
+================================================================================

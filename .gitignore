@@ -1,0 +1,26 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Inno Setup output
+installer/output/
+
+# FFmpeg binaries (GPL — not redistributed via this repo; users fetch separately)
+ffmpeg/
+
+# Legacy directory (predecessor tool, kept locally only)
+Vidcmp/
+
+# IDE / editor
+*.user
+*.suo
+.vs/
+.vscode/
+.idea/
+.claude/
+
+# Misc
+*.log
+*.tmp
+Thumbs.db
+desktop.ini
