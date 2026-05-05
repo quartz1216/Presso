@@ -25,6 +25,7 @@ public partial class MainWindow : Window
         _compressor = new Compressor(AppPaths.FfmpegBinDir);
         QueueList.ItemsSource = Items;
         UpdateHint();
+        _ = PrewarmAsync();
 
         if (!_compressor.ToolsAvailable)
         {
@@ -35,13 +36,22 @@ public partial class MainWindow : Window
         }
     }
 
+    private async Task PrewarmAsync()
+    {
+        try { await _compressor.PrewarmAsync(CancellationToken.None); }
+        catch (Exception ex) { Title = $"Presso — 検出失敗: {ex.GetType().Name}"; }
+        UpdateHint();
+    }
+
     private void UpdateHint()
     {
         string codec = _config.UseHevc ? "HEVC" : "H.264";
+        string accel = _compressor.AcceleratorLabel;
         string outDesc = _config.OutputMode == "FixedDir" && !string.IsNullOrWhiteSpace(_config.FixedOutputDir)
             ? $"出力: {_config.FixedOutputDir}"
             : "出力: 同フォルダ";
-        HintText.Text = $"目標 {_config.TargetMB:0.#}MB / {codec} / {outDesc}";
+        HintText.Text = $"目標 {_config.TargetMB:0.#}MB / {codec} / {accel} / {outDesc}";
+        Title = $"Presso — {accel}";
     }
 
     private void Window_DragOver(object sender, DragEventArgs e)
