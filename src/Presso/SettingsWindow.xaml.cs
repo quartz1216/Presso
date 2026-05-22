@@ -104,4 +104,10 @@ public partial class SettingsWindow : Window
         }
         Process.Start(new ProcessStartInfo("explorer.exe", $"\"{dir}\"") { UseShellExecute = true });
     }
+
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        ThemeHelper.ApplyDarkMode(this);
+    }
 }

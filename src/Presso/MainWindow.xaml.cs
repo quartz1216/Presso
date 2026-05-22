@@ -192,4 +192,10 @@ public partial class MainWindow : Window
         _cts?.Cancel();
         base.OnClosed(e);
     }
+
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        ThemeHelper.ApplyDarkMode(this);
+    }
 }
