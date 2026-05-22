@@ -1,6 +1,6 @@
 ; Presso Inno Setup script
 #define MyAppName       "Presso"
-#define MyAppVersion    "1.2.1"
+#define MyAppVersion    "1.2.2"
 #define MyAppPublisher  "Presso"
 #define MyAppExeName    "Presso.exe"
 

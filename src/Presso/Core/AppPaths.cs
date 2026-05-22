@@ -16,20 +16,7 @@ public static class AppPaths
         }
     }
 
-    public static string FfmpegBinDir
-    {
-        get
-        {
-            var p1 = Path.Combine(AppDir, "ffmpeg", "bin");
-            if (File.Exists(Path.Combine(p1, "ffmpeg.exe"))) return p1;
-
-            // Fallback for local dev (from src/Presso/bin/Debug/net8.0-windows/)
-            var p2 = Path.GetFullPath(Path.Combine(AppDir, "..", "..", "..", "..", "..", "ffmpeg", "bin"));
-            if (File.Exists(Path.Combine(p2, "ffmpeg.exe"))) return p2;
-
-            return p1;
-        }
-    }
+    public static string FfmpegBinDir => Path.Combine(AppDir, "ffmpeg", "bin");
 
     public static readonly string[] SupportedExtensions =
         { ".mp4", ".mov", ".mkv", ".webm", ".avi" };
