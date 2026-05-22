@@ -25,7 +25,7 @@
                    TextTrimming="CharacterEllipsis"/>
         <ProgressBar Grid.Row="2" x:Name="ProgressBarCtl" Margin="0,12,0,0"
                      Height="18" Maximum="100"/>
-        <Button Grid.Row="3" x:Name="ActionButton" Content="キャンセル"
+        <Button Grid.Row="3" x:Name="ActionButton" Content="Cancel"
                 Click="Action_Click" HorizontalAlignment="Right" Margin="0,12,0,0"/>
     </Grid>
 </Window>

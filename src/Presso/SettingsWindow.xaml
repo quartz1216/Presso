@@ -1,7 +1,7 @@
 <Window x:Class="Presso.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Presso 設定" Height="430" Width="460"
+        Title="Presso Settings" Height="430" Width="460"
         WindowStartupLocation="CenterOwner"
         Background="{DynamicResource BgBrush}"
         Foreground="{DynamicResource TextBrush}"
@@ -20,7 +20,7 @@
 
         <!-- Target size -->
         <StackPanel Grid.Row="0">
-            <TextBlock Text="目標サイズ (MB)" FontWeight="SemiBold" Margin="0,0,0,6"/>
+            <TextBlock Text="Target Size (MB)" FontWeight="SemiBold" Margin="0,0,0,6"/>
             <DockPanel Margin="0,0,0,4">
                 <TextBlock DockPanel.Dock="Right" x:Name="TargetSizeLabel"
                            Text="10 MB" Width="60" TextAlignment="Right"
@@ -41,37 +41,37 @@
 
         <!-- HEVC -->
         <StackPanel Grid.Row="1" Margin="0,20,0,0">
-            <CheckBox x:Name="UseHevcCheck" Content="HEVC (H.265) を使用する" FontWeight="SemiBold"/>
+            <CheckBox x:Name="UseHevcCheck" Content="Use HEVC (H.265)" FontWeight="SemiBold"/>
             <TextBlock TextWrapping="Wrap"
                        Foreground="{StaticResource MutedBrush}"
                        FontSize="11" Margin="22,4,0,0"
-                       Text="より高い圧縮率。オフにすると H.264 のみ使用 (互換性最優先)"/>
+                       Text="Higher compression. If off, uses H.264 (Maximum compatibility)"/>
         </StackPanel>
 
         <!-- Output -->
         <StackPanel Grid.Row="2" Margin="0,20,0,0">
-            <TextBlock Text="出力先 (GUI使用時)" FontWeight="SemiBold" Margin="0,0,0,6"/>
-            <RadioButton x:Name="OutSourceDir" Content="ソースと同じフォルダ" GroupName="OutMode" Margin="0,0,0,4"/>
-            <RadioButton x:Name="OutFixedDir" Content="指定フォルダ" GroupName="OutMode"/>
+            <TextBlock Text="Output Location (GUI)" FontWeight="SemiBold" Margin="0,0,0,6"/>
+            <RadioButton x:Name="OutSourceDir" Content="Same as source folder" GroupName="OutMode" Margin="0,0,0,4"/>
+            <RadioButton x:Name="OutFixedDir" Content="Specific folder" GroupName="OutMode"/>
             <DockPanel Margin="22,4,0,0" IsEnabled="{Binding IsChecked, ElementName=OutFixedDir}">
-                <Button DockPanel.Dock="Right" Content="参照..." Width="64"
+                <Button DockPanel.Dock="Right" Content="Browse..." Width="64"
                         Click="Browse_Click" Margin="6,0,0,0"/>
                 <TextBox x:Name="FixedDirBox" VerticalContentAlignment="Center"/>
             </DockPanel>
             <TextBlock TextWrapping="Wrap"
                        Foreground="{StaticResource MutedBrush}"
                        FontSize="11" Margin="0,8,0,0"
-                       Text="※ 右クリックメニューから起動した場合は、常にソースと同じフォルダに出力されます。"/>
+                       Text="* If launched from right-click menu, output is always in the source folder."/>
         </StackPanel>
 
         <!-- Buttons -->
         <Grid Grid.Row="4" Margin="0,16,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Content="ライセンス情報" Click="Licenses_Click"/>
+                <Button Content="Licenses" Click="Licenses_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="キャンセル" Click="Cancel_Click" Margin="0,0,8,0"/>
-                <Button Content="保存" Click="Save_Click" Style="{StaticResource AccentButton}"/>
+                <Button Content="Cancel" Click="Cancel_Click" Margin="0,0,8,0"/>
+                <Button Content="Save" Click="Save_Click" Style="{StaticResource AccentButton}"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -48,7 +48,7 @@ public partial class SettingsWindow : Window
         // WPF has OpenFolderDialog from .NET 8
         var dlg = new OpenFolderDialog
         {
-            Title = "出力フォルダを選択",
+            Title = "Select Output Folder",
             InitialDirectory = Directory.Exists(FixedDirBox.Text)
                 ? FixedDirBox.Text
                 : Environment.GetFolderPath(Environment.SpecialFolder.MyVideos),
@@ -68,7 +68,7 @@ public partial class SettingsWindow : Window
 
         if (_config.OutputMode == "FixedDir" && string.IsNullOrWhiteSpace(_config.FixedOutputDir))
         {
-            MessageBox.Show(this, "出力フォルダを指定してください。", "Presso",
+            MessageBox.Show(this, "Please specify an output folder.", "Presso",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
@@ -81,7 +81,7 @@ public partial class SettingsWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(this, $"設定の保存に失敗しました:\n{ex.Message}", "Presso",
+            MessageBox.Show(this, $"Failed to save settings:\n{ex.Message}", "Presso",
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -98,7 +98,7 @@ public partial class SettingsWindow : Window
         if (!Directory.Exists(dir))
         {
             MessageBox.Show(this,
-                "ライセンスフォルダが見つかりません:\n" + dir,
+                "Licenses folder not found:\n" + dir,
                 "Presso", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }

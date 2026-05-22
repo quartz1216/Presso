@@ -30,8 +30,8 @@ public partial class MainWindow : Window
         if (!_compressor.ToolsAvailable)
         {
             MessageBox.Show(this,
-                $"ffmpeg.exe が見つかりません:\n{AppPaths.FfmpegBinDir}\n\n" +
-                "インストールが破損している可能性があります。",
+                $"ffmpeg.exe not found:\n{AppPaths.FfmpegBinDir}\n\n" +
+                "Installation might be corrupted.",
                 "Presso", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
@@ -39,7 +39,7 @@ public partial class MainWindow : Window
     private async Task PrewarmAsync()
     {
         try { await _compressor.PrewarmAsync(CancellationToken.None); }
-        catch (Exception ex) { Title = $"Presso — 検出失敗: {ex.GetType().Name}"; }
+        catch (Exception ex) { Title = $"Presso — Detection Failed: {ex.GetType().Name}"; }
         UpdateHint();
     }
 
@@ -48,9 +48,9 @@ public partial class MainWindow : Window
         string codec = _config.UseHevc ? "HEVC" : "H.264";
         string accel = _compressor.AcceleratorLabel;
         string outDesc = _config.OutputMode == "FixedDir" && !string.IsNullOrWhiteSpace(_config.FixedOutputDir)
-            ? $"出力: {_config.FixedOutputDir}"
-            : "出力: 同フォルダ";
-        HintText.Text = $"目標 {_config.TargetMB:0.#}MB / {codec} / {accel} / {outDesc}";
+            ? $"Output: {_config.FixedOutputDir}"
+            : "Output: Same folder";
+        HintText.Text = $"Target {_config.TargetMB:0.#}MB / {codec} / {accel} / {outDesc}";
         Title = $"Presso — {accel}";
     }
 
@@ -126,7 +126,7 @@ public partial class MainWindow : Window
 
             if (ct.IsCancellationRequested)
             {
-                job.Status = "キャンセル";
+                job.Status = "Canceled";
                 job.Progress = 0;
             }
             else if (ok)
@@ -135,12 +135,12 @@ public partial class MainWindow : Window
             }
             else
             {
-                job.Status = "失敗";
+                job.Status = "Failed";
             }
         }
         catch (Exception ex)
         {
-            job.Status = $"エラー: {ex.Message}";
+            job.Status = $"Error: {ex.Message}";
         }
     }
 
@@ -164,7 +164,7 @@ public partial class MainWindow : Window
     {
         for (int i = Items.Count - 1; i >= 0; i--)
         {
-            if (Items[i].Progress >= 100 || Items[i].Status.StartsWith("失敗") || Items[i].Status.StartsWith("エラー") || Items[i].Status == "キャンセル")
+            if (Items[i].Progress >= 100 || Items[i].Status.StartsWith("Failed") || Items[i].Status.StartsWith("Error") || Items[i].Status == "Canceled")
                 Items.RemoveAt(i);
         }
     }
@@ -181,7 +181,7 @@ public partial class MainWindow : Window
 
         if (!Directory.Exists(dir))
         {
-            MessageBox.Show(this, "フォルダがありません: " + dir, "Presso");
+            MessageBox.Show(this, "Folder not found: " + dir, "Presso");
             return;
         }
         Process.Start(new ProcessStartInfo("explorer.exe", $"\"{dir}\"") { UseShellExecute = true });

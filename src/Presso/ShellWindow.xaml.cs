@@ -19,7 +19,7 @@ public partial class ShellWindow : Window
         InitializeComponent();
         _input = inputPath;
         FileNameText.Text = Path.GetFileName(inputPath);
-        StatusText.Text = "準備中...";
+        StatusText.Text = "Preparing...";
         Loaded += async (_, _) => await RunAsync();
     }
 
@@ -30,15 +30,15 @@ public partial class ShellWindow : Window
 
         if (!compressor.ToolsAvailable)
         {
-            StatusText.Text = "ffmpeg.exe が見つかりません";
-            ActionButton.Content = "閉じる";
+            StatusText.Text = "ffmpeg.exe not found";
+            ActionButton.Content = "Close";
             _finished = true;
             return;
         }
         if (!File.Exists(_input))
         {
-            StatusText.Text = "入力ファイルが見つかりません";
-            ActionButton.Content = "閉じる";
+            StatusText.Text = "Input file not found";
+            ActionButton.Content = "Close";
             _finished = true;
             return;
         }
@@ -58,10 +58,10 @@ public partial class ShellWindow : Window
                 _input, outPath, config.TargetMB, config.UseHevc, progress, _cts.Token);
 
             _finished = true;
-            ActionButton.Content = "閉じる";
+            ActionButton.Content = "Close";
             if (_cts.IsCancellationRequested)
             {
-                StatusText.Text = "キャンセルされました";
+                StatusText.Text = "Canceled";
             }
             else if (ok)
             {
@@ -70,14 +70,14 @@ public partial class ShellWindow : Window
             }
             else
             {
-                StatusText.Text = "失敗しました";
+                StatusText.Text = "Failed";
             }
         }
         catch (Exception ex)
         {
             _finished = true;
-            ActionButton.Content = "閉じる";
-            StatusText.Text = "エラー: " + ex.Message;
+            ActionButton.Content = "Close";
+            StatusText.Text = "Error: " + ex.Message;
         }
     }
 
@@ -95,7 +95,7 @@ public partial class ShellWindow : Window
         {
             _cts.Cancel();
             ActionButton.IsEnabled = false;
-            ActionButton.Content = "中止中...";
+            ActionButton.Content = "Canceling...";
         }
     }
 

@@ -31,13 +31,13 @@
             </Border.Style>
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Text="🎬" FontSize="32" HorizontalAlignment="Center" Margin="0,0,0,4"/>
-                <TextBlock Text="動画をここにドロップして圧縮"
+                <TextBlock Text="Drop video here to compress"
                            FontSize="18"
                            HorizontalAlignment="Center"/>
                 <TextBlock x:Name="HintText" FontSize="11"
                            Foreground="{StaticResource MutedBrush}"
                            HorizontalAlignment="Center" Margin="0,4,0,0"
-                           Text="目標 10MB / HEVC ON / 同フォルダ出力"/>
+                           Text="Target 10MB / HEVC ON / Same folder"/>
             </StackPanel>
         </Border>
 
@@ -63,9 +63,9 @@
                                 <Setter Property="BorderThickness" Value="0,0,1,1"/>
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>
-                        <GridViewColumn Header="ファイル" Width="240"
+                        <GridViewColumn Header="File" Width="240"
                                         DisplayMemberBinding="{Binding FileName}"/>
-                        <GridViewColumn Header="進捗" Width="220">
+                        <GridViewColumn Header="Progress" Width="220">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ProgressBar Value="{Binding Progress}" Maximum="100"
@@ -73,7 +73,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="状態" Width="260"
+                        <GridViewColumn Header="Status" Width="260"
                                         DisplayMemberBinding="{Binding Status}"/>
                     </GridView>
                 </ListView.View>
@@ -89,13 +89,13 @@
         <!-- Buttons -->
         <Grid Grid.Row="2" Margin="0,12,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button x:Name="CancelButton" Content="キャンセル" Click="Cancel_Click"
+                <Button x:Name="CancelButton" Content="Cancel" Click="Cancel_Click"
                         IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="クリア" Click="Clear_Click" Margin="0,0,8,0"/>
-                <Button Content="出力フォルダを開く" Click="OpenOutput_Click" Margin="0,0,8,0"/>
-                <Button Content="設定" Click="Settings_Click" Style="{StaticResource AccentButton}"/>
+                <Button Content="Clear" Click="Clear_Click" Margin="0,0,8,0"/>
+                <Button Content="Open Output Folder" Click="OpenOutput_Click" Margin="0,0,8,0"/>
+                <Button Content="Settings" Click="Settings_Click" Style="{StaticResource AccentButton}"/>
             </StackPanel>
         </Grid>
     </Grid>

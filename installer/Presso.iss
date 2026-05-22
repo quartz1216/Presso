@@ -1,6 +1,6 @@
 ; Presso Inno Setup script
 #define MyAppName       "Presso"
-#define MyAppVersion    "1.2.0"
+#define MyAppVersion    "1.2.1"
 #define MyAppPublisher  "Presso"
 #define MyAppExeName    "Presso.exe"
 
@@ -27,10 +27,10 @@ LicenseFile=..\LICENSE
 CloseApplications=force
 
 [Languages]
-Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "デスクトップにショートカットを作成する"; GroupDescription: "追加のショートカット:"; Flags: unchecked
+Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional shortcuts:"; Flags: unchecked
 
 [Files]
 Source: "..\src\Presso\bin\Release\net8.0-windows\win-x64\publish\Presso.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -41,7 +41,7 @@ Source: "..\README.md"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignorev
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{#MyAppName} をアンインストール"; Filename: "{uninstallexe}"
+Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 ; -- Right-click "Compress with Presso" entry for major video extensions --
@@ -72,4 +72,4 @@ Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso";
 Root: HKLM; Subkey: "Software\Classes\SystemFileAssociations\.avi\shell\Presso\command";  ValueType: string; ValueName: "";     ValueData: """{app}\{#MyAppExeName}"" --shell ""%1"""
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{#MyAppName} を起動"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\{#MyAppExeName}"; Description: "Launch {#MyAppName}"; Flags: nowait postinstall skipifsilent
